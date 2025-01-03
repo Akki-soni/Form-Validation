@@ -22,6 +22,30 @@ const validateInputs = () => {
   } else {
     setSuccess(username);
   }
+
+  if (emailValue === "") {
+    setError(email, "Email is required");
+  } else if (!isValidEmail(emailValue)) {
+    setError(email, "Provide a valid Email Address");
+  } else {
+    setSuccess(email);
+  }
+
+  if (passwordValue === "") {
+    setError(password, "Password is required");
+  } else if (passwordValue.length < 8) {
+    setError(password, "Password must be at least 8 characters");
+  } else {
+    setSuccess(password);
+  }
+
+  if (cPasswordValue === "") {
+    setError(Cpassword, "Please Confirm Your Password");
+  } else if (cPasswordValue !== passwordValue) {
+    setError(password, "Password doesn't match");
+  } else {
+    setSuccess(Cpassword);
+  }
 };
 
 const setError = (element, message) => {
@@ -41,3 +65,9 @@ const setSuccess = (element) => {
   inputControl.classList.add("success");
   inputControl.classList.remove("error");
 };
+
+function isValidEmail(e) {
+  var reg =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return reg.test(e);
+}
